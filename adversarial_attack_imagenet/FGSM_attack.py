@@ -31,8 +31,8 @@ if __name__ == '__main__':
     images, labels = ep.astensors(*samples(fmodel, dataset="imagenet", batchsize=20))
     print(accuracy(fmodel, images, labels, False))
 
-    # attack = LinfPGD()
-    # attack = L2DeepFoolAttack()
+    #attack = LinfPGD()
+    #attack = L2DeepFoolAttack()
     attack = FGSM()
     epsilons = [0.0, 0.001, 0.01, 0.03, 0.1, 0.3, 0.5, 1.0]
     advs, _, success = attack(fmodel, images, labels, epsilons=epsilons)

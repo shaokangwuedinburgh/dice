@@ -10,6 +10,7 @@ import torch
 import cv2
 from models.types import Bounds
 from models.base import Model
+from imageio import imsave
 
 def accuracy(fmodel: Model, inputs: Any, labels: Any, vis: Any) -> float:
     inputs_, labels_ = ep.astensors(inputs, labels)
@@ -175,7 +176,8 @@ def save_img(im, path, size, cls=None):
         path (str)  --  图像寻出的路径
         size (list/tuple)  --  图像合并的高宽(heigth, width)
     """
-    scipy.misc.imsave(path, merge(im, size, cls)) #将合并后的图保存到相应path中
+    imsave(path, merge(im, size, cls)) #将合并后的图保存到相应path中
+    #scipy.misc.imsave(path, merge(im, size, cls)) #将合并后的图保存到相应path中
     img_ori = cv2.imread(path)
     cv2.putText(img_ori, cls, (5, 30), cv2.FONT_HERSHEY_SIMPLEX,
                 1, (0, 0, 0), 4, cv2.LINE_AA)
